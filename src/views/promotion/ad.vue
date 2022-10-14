@@ -370,7 +370,7 @@ export default {
           'name',
           'content',
           'url',
-          'postion',
+          'position',
           'link',
           'enabled'
         ]
