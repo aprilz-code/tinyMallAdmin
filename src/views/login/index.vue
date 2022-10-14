@@ -119,7 +119,7 @@ export default {
   },
   created() {
     this.getCode()
-    // window.addEventListener('hashchange', this.afterQRScan)
+    // window.addEventListener('hashchange', this.afteQRScan)
   },
   destroyed() {
     // window.removeEventListener('hashchange', this.afterQRScan)
