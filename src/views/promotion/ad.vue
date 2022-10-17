@@ -3,8 +3,8 @@
 
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-      <el-input v-model="listQuery.name" clearable class="filter-item" style="width: 200px;" placeholder="请输入广告标题" />
-      <el-input v-model="listQuery.content" clearable class="filter-item" style="width: 200px;" placeholder="请输入广告内容" />
+      <el-input v-model="listQuery.name" clearable class="filter-item" style="width: 200px;" placeholder="请输入广告标题" />&nbsp;
+      <el-input v-model="listQuery.content" clearable class="filter-item" style="width: 200px;" placeholder="请输入广告内容" />&nbsp;
       <el-button
         class="filter-item"
         type="primary"
@@ -286,7 +286,8 @@ export default {
         if (valid) {
           createAd(this.dataForm)
             .then(response => {
-              this.list.unshift(response.data.data)
+              // 数组头部插入
+              this.list.unshift(response.data)
               this.dialogFormVisible = false
               this.$notify.success({
                 title: '成功',
@@ -296,7 +297,7 @@ export default {
             .catch(response => {
               this.$notify.error({
                 title: '失败',
-                message: response.data.errmsg
+                message: response.code
               })
             })
         }
@@ -331,14 +332,14 @@ export default {
             .catch(response => {
               this.$notify.error({
                 title: '失败',
-                message: response.data.errmsg
+                message: response.code
               })
             })
         }
       })
     },
     handleDelete(row) {
-      deleteAd(row)
+      deleteAd({ 'id': row.id })
         .then(response => {
           this.$notify.success({
             title: '成功',
@@ -349,7 +350,7 @@ export default {
         .catch(response => {
           this.$notify.error({
             title: '失败',
-            message: response.data.errmsg
+            message: response.code
           })
         })
     },
