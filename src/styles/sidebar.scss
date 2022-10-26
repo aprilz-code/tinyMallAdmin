@@ -112,8 +112,9 @@
         }
 
         .sub-el-icon {
-          margin-left: 19px;
-        }
+          margin-right: 12px;
+          margin-left: -2px;
+        }        
       }
     }
 
@@ -128,7 +129,8 @@
         }
 
         .sub-el-icon {
-          margin-left: 19px;
+          margin-right: 12px;
+          margin-left: -2px;
         }
 
         .el-submenu__icon-arrow {
@@ -194,7 +196,7 @@
     .sub-el-icon {
       margin-right: 12px;
       margin-left: -2px;
-    }
+    }    
   }
 
   .nest-menu .el-submenu>.el-submenu__title,

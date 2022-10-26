@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
+import {Message, MessageBox} from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import {getToken} from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
@@ -48,24 +48,24 @@ service.interceptors.response.use(
         type: 'error'
       })
       return Promise.reject('error')
-    } else if (res.code === 503) {
-      MessageBox.alert('请求业务目前未支持', '警告', {
-        confirmButtonText: '确定',
-        type: 'error'
-      })
-      return Promise.reject('error')
-    } else if (res.code === 504) {
-      MessageBox.alert('更新数据已经失效，请刷新页面重新操作', '警告', {
-        confirmButtonText: '确定',
-        type: 'error'
-      })
-      return Promise.reject('error')
-    } else if (res.code === 505) {
-      MessageBox.alert('更新失败，请再尝试一次', '警告', {
-        confirmButtonText: '确定',
-        type: 'error'
-      })
-      return Promise.reject('error')
+      // } else if (res.code === 503) {
+      //   MessageBox.alert('请求业务目前未支持', '警告', {
+      //     confirmButtonText: '确定',
+      //     type: 'error'
+      //   })
+      //   return Promise.reject('error')
+      // } else if (res.code === 504) {
+      //   MessageBox.alert('更新数据已经失效，请刷新页面重新操作', '警告', {
+      //     confirmButtonText: '确定',
+      //     type: 'error'
+      //   })
+      //   return Promise.reject('error')
+      // } else if (res.code === 505) {
+      //   MessageBox.alert('更新失败，请再尝试一次', '警告', {
+      //     confirmButtonText: '确定',
+      //     type: 'error'
+      //   })
+      //   return Promise.reject('error')
     } else if (res.code === 506) {
       MessageBox.alert('没有操作权限，请联系管理员授权', '错误', {
         confirmButtonText: '确定',
@@ -79,9 +79,13 @@ service.interceptors.response.use(
       return res
     }
   }, error => {
+    let msg = '服务器异常，请稍后重试'
+    if (error.response.data.message) {
+      msg = error.response.data.message;
+    }
     console.log('err' + error)// for debug
     Message({
-      message: '服务器异常，请稍后重试',
+      message: msg,
       type: 'error',
       duration: 5 * 1000
     })
