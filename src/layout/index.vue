@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain, TagsView } from './components'
+import {AppMain, Navbar, Sidebar, TagsView} from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     handleClickOutside() {
-      this.$store.dispatch('closeSideBar', { withoutAnimation: false })
+      this.$store.dispatch('closeSideBar', {withoutAnimation: false})
     }
   }
 }
@@ -49,16 +49,19 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 @import "src/styles/mixin.scss";
+
 .app-wrapper {
   @include clearfix;
   position: relative;
   height: 100%;
   width: 100%;
-  &.mobile.openSidebar{
+
+  &.mobile.openSidebar {
     position: fixed;
     top: 0;
   }
 }
+
 .drawer-bg {
   background: #000;
   opacity: 0.3;

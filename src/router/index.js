@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-Vue.use(Router)
-
 /* Layout */
 import Layout from '@/layout'
+
+Vue.use(Router)
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -65,162 +64,155 @@ export const constantRoutes = [
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
-
-  // {
-  //   path: '/user',
-  //   component: Layout,
-  //   redirect: 'noredirect',
-  //   alwaysShow: true,
-  //   name: 'userManage',
-  //   meta: {
-  //     title: '用户管理',
-  //     icon: 'chart'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'user',
-  //       component: () => import('@/views/user/user'),
-  //       name: 'user',
-  //       meta: {
-  //         perms: ['GET /admin/user/list'],
-  //         title: '会员管理',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'address',
-  //       component: () => import('@/views/user/address'),
-  //       name: 'address',
-  //       meta: {
-  //         perms: ['GET /admin/address/list'],
-  //         title: '收货地址',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'collect',
-  //       component: () => import('@/views/user/collect'),
-  //       name: 'collect',
-  //       meta: {
-  //         perms: ['GET /admin/collect/list'],
-  //         title: '会员收藏',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'footprint',
-  //       component: () => import('@/views/user/footprint'),
-  //       name: 'footprint',
-  //       meta: {
-  //         perms: ['GET /admin/footprint/list'],
-  //         title: '会员足迹',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'history',
-  //       component: () => import('@/views/user/history'),
-  //       name: 'history',
-  //       meta: {
-  //         perms: ['GET /admin/history/list'],
-  //         title: '搜索历史',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'feedback',
-  //       component: () => import('@/views/user/feedback'),
-  //       name: 'feedback',
-  //       meta: {
-  //         perms: ['GET /admin/feedback/list'],
-  //         title: '意见反馈',
-  //         noCache: true
-  //       }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/mall',
-  //   component: Layout,
-  //   redirect: 'noredirect',
-  //   alwaysShow: true,
-  //   name: 'mallManage',
-  //   meta: {
-  //     title: '商场管理',
-  //     icon: 'chart'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'region',
-  //       component: () => import('@/views/mall/region'),
-  //       name: 'region',
-  //       meta: {
-  //         title: '行政区域',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'brand',
-  //       component: () => import('@/views/mall/brand'),
-  //       name: 'brand',
-  //       meta: {
-  //         perms: ['GET /admin/brand/list', 'POST /admin/brand/create', 'GET /admin/brand/read', 'POST /admin/brand/update', 'POST /admin/brand/delete'],
-  //         title: '品牌制造商',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'category',
-  //       component: () => import('@/views/mall/category'),
-  //       name: 'category',
-  //       meta: {
-  //         perms: ['GET /admin/category/list', 'POST /admin/category/create', 'GET /admin/category/read', 'POST /admin/category/update', 'POST /admin/category/delete'],
-  //         title: '商品类目',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'order',
-  //       component: () => import('@/views/mall/order'),
-  //       name: 'order',
-  //       meta: {
-  //         perms: ['GET /admin/order/list', 'GET /admin/order/detail', 'POST /admin/order/ship', 'POST /admin/order/refund', 'POST /admin/order/delete', 'POST /admin/order/reply'],
-  //         title: '订单管理',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'aftersale',
-  //       component: () => import('@/views/mall/aftersale'),
-  //       name: 'aftersale',
-  //       meta: {
-  //         perms: ['GET /admin/aftersale/list', 'GET /admin/aftersale/detail', 'POST /admin/order/receive', 'POST /admin/aftersale/complete', 'POST /admin/aftersale/reject'],
-  //         title: '售后管理',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'issue',
-  //       component: () => import('@/views/mall/issue'),
-  //       name: 'issue',
-  //       meta: {
-  //         perms: ['GET /admin/issue/list', 'POST /admin/issue/create', 'GET /admin/issue/read', 'POST /admin/issue/update', 'POST /admin/issue/delete'],
-  //         title: '通用问题',
-  //         noCache: true
-  //       }
-  //     },
-  //     {
-  //       path: 'keyword',
-  //       component: () => import('@/views/mall/keyword'),
-  //       name: 'keyword',
-  //       meta: {
-  //         perms: ['GET /admin/keyword/list', 'POST /admin/keyword/create', 'GET /admin/keyword/read', 'POST /admin/keyword/update', 'POST /admin/keyword/delete'],
-  //         title: '关键词',
-  //         noCache: true
-  //       }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/user',
+    component: Layout,
+    redirect: 'noredirect',
+    alwaysShow: true,
+    name: 'userManage',
+    meta: {
+      title: '用户管理',
+      icon: 'chart'
+    },
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/user/user'),
+        name: 'user',
+        meta: {
+          title: '会员管理',
+          noCache: true
+        }
+      },
+      {
+        path: 'address',
+        component: () => import('@/views/user/address'),
+        name: 'address',
+        meta: {
+          title: '收货地址',
+          noCache: true
+        }
+      },
+      {
+        path: 'collect',
+        component: () => import('@/views/user/collect'),
+        name: 'collect',
+        meta: {
+          title: '会员收藏',
+          noCache: true
+        }
+      },
+      {
+        path: 'footprint',
+        component: () => import('@/views/user/footprint'),
+        name: 'footprint',
+        meta: {
+          title: '会员足迹',
+          noCache: true
+        }
+      },
+      {
+        path: 'history',
+        component: () => import('@/views/user/history'),
+        name: 'history',
+        meta: {
+          title: '搜索历史',
+          noCache: true
+        }
+      },
+      {
+        path: 'feedback',
+        component: () => import('@/views/user/feedback'),
+        name: 'feedback',
+        meta: {
+          title: '意见反馈',
+          noCache: true
+        }
+      }
+    ]
+  },
+  {
+    path: '/mall',
+    component: Layout,
+    redirect: 'noredirect',
+    alwaysShow: true,
+    name: 'mallManage',
+    meta: {
+      title: '商场管理',
+      icon: 'chart'
+    },
+    children: [
+      {
+        path: 'region',
+        component: () => import('@/views/mall/region'),
+        name: 'region',
+        meta: {
+          title: '行政区域',
+          noCache: true
+        }
+      },
+      {
+        path: 'brand',
+        component: () => import('@/views/mall/brand'),
+        name: 'brand',
+        meta: {
+          perms: ['GET /admin/brand/list', 'POST /admin/brand/create', 'GET /admin/brand/read', 'POST /admin/brand/update', 'POST /admin/brand/delete'],
+          title: '品牌制造商',
+          noCache: true
+        }
+      },
+      {
+        path: 'category',
+        component: () => import('@/views/mall/category'),
+        name: 'category',
+        meta: {
+          perms: ['GET /admin/category/list', 'POST /admin/category/create', 'GET /admin/category/read', 'POST /admin/category/update', 'POST /admin/category/delete'],
+          title: '商品类目',
+          noCache: true
+        }
+      },
+      {
+        path: 'order',
+        component: () => import('@/views/mall/order'),
+        name: 'order',
+        meta: {
+          perms: ['GET /admin/order/list', 'GET /admin/order/detail', 'POST /admin/order/ship', 'POST /admin/order/refund', 'POST /admin/order/delete', 'POST /admin/order/reply'],
+          title: '订单管理',
+          noCache: true
+        }
+      },
+      {
+        path: 'aftersale',
+        component: () => import('@/views/mall/aftersale'),
+        name: 'aftersale',
+        meta: {
+          perms: ['GET /admin/aftersale/list', 'GET /admin/aftersale/detail', 'POST /admin/order/receive', 'POST /admin/aftersale/complete', 'POST /admin/aftersale/reject'],
+          title: '售后管理',
+          noCache: true
+        }
+      },
+      {
+        path: 'issue',
+        component: () => import('@/views/mall/issue'),
+        name: 'issue',
+        meta: {
+          perms: ['GET /admin/issue/list', 'POST /admin/issue/create', 'GET /admin/issue/read', 'POST /admin/issue/update', 'POST /admin/issue/delete'],
+          title: '通用问题',
+          noCache: true
+        }
+      },
+      {
+        path: 'keyword',
+        component: () => import('@/views/mall/keyword'),
+        name: 'keyword',
+        meta: {
+          perms: ['GET /admin/keyword/list', 'POST /admin/keyword/create', 'GET /admin/keyword/read', 'POST /admin/keyword/update', 'POST /admin/keyword/delete'],
+          title: '关键词',
+          noCache: true
+        }
+      }
+    ]
+  },
   // {
   //   path: '/goods',
   //   component: Layout,
@@ -584,25 +576,25 @@ export const constantRoutes = [
         path: 'password',
         component: () => import('@/views/profile/password'),
         name: 'password',
-        meta: { title: '修改密码', noCache: true }
+        meta: {title: '修改密码', noCache: true}
       },
       {
         path: 'notice',
         component: () => import('@/views/profile/notice'),
         name: 'notice',
-        meta: { title: '通知中心', noCache: true }
+        meta: {title: '通知中心', noCache: true}
       }
     ],
     hidden: true
   },
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {path: '*', redirect: '/404', hidden: true}
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 

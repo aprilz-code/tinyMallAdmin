@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i class="el-icon-full-screen" @click="click" />
+    <i class="el-icon-full-screen" @click="click"/>
   </div>
 </template>
 

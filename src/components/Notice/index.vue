@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-badge :is-dot="hasNotice">
-      <i class="el-icon-bell" @click="click" />
+      <i class="el-icon-bell" @click="click"/>
     </el-badge>
   </div>
 </template>
 
 <script>
-import { nNotice } from '@/api/profile'
+import {nNotice} from '@/api/profile'
 
 export default {
   data() {
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     click() {
-      this.$router.push({ path: '/profile/notice' })
+      this.$router.push({path: '/profile/notice'})
     },
     checkNotice() {
       if (this.hasNotice) {
