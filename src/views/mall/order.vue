@@ -468,7 +468,7 @@ export default {
       }).catch(response => {
         this.$notify.error({
           title: '失败',
-          message: response.data.errmsg
+          message: response.message
         })
       }).finally(() => {
         this.payDialogVisible = false
@@ -497,7 +497,7 @@ export default {
           }).catch(response => {
             this.$notify.error({
               title: '失败',
-              message: response.data.errmsg
+              message: response.message
             })
           })
         }
@@ -513,7 +513,7 @@ export default {
       }).catch(response => {
         this.$notify.error({
           title: '失败',
-          message: response.data.errmsg
+          message: response.message
         })
       })
     },
@@ -539,7 +539,7 @@ export default {
           }).catch(response => {
             this.$notify.error({
               title: '失败',
-              message: response.data.errmsg
+              message: response.message
             })
           })
         }

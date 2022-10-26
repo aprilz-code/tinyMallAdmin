@@ -3,35 +3,46 @@
 
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-      <el-input v-model="listQuery.keyword" clearable class="filter-item" style="width: 200px;" placeholder="请输入关键字" />
-      <el-input v-model="listQuery.url" clearable class="filter-item" style="width: 200px;" placeholder="请输入跳转链接" />
+      <el-input v-model="listQuery.goodsId" clearable class="filter-item" style="width: 200px;" placeholder="请输入商品编号" />
       <el-button  class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button  class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">添加</el-button>
-      <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">导出</el-button>
+      <el-button
+        :loading="downloadLoading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-download"
+        @click="handleDownload"
+      >导出
+      </el-button>
     </div>
 
     <!-- 查询结果 -->
     <el-table v-loading="listLoading" :data="list" element-loading-text="正在查询中。。。" border fit highlight-current-row>
+      <el-table-column align="center" label="团购规则ID" prop="id" />
 
-      <el-table-column align="center" width="150px" label="关键词ID" prop="id" sortable />
+      <el-table-column align="center" label="商品ID" prop="goodsId" />
 
-      <el-table-column align="center" min-width="100px" label="关键词" prop="keyword" />
+      <el-table-column align="center" min-width="100" label="名称" prop="goodsName" />
 
-      <el-table-column align="center" min-width="300px" label="跳转链接" prop="url" />
-
-      <el-table-column align="center" min-width="100px" label="是否推荐" prop="isHot">
+      <el-table-column align="center" property="picUrl" label="图片">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.isHot ? 'success' : 'error' ">{{ scope.row.isHot ? '是' : '否' }}</el-tag>
+          <img :src="scope.row.picUrl" width="40">
         </template>
       </el-table-column>
 
-      <el-table-column align="center" min-width="100px" label="是否默认" prop="isDefault">
+      <el-table-column align="center" label="团购优惠" prop="discount" />
+
+      <el-table-column align="center" label="团购要求" prop="discountMember" />
+
+      <el-table-column align="center" label="状态" prop="status">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.isDefault ? 'success' : 'error' ">{{ scope.row.isDefault ? '是' : '否' }}</el-tag>
+          <el-tag :type="scope.row.status === 0 ? 'success' : 'error' ">{{ statusMap[scope.row.status] }}</el-tag>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="操作" width="250" class-name="small-padding fixed-width">
+      <el-table-column align="center" label="结束时间" prop="expireTime" />
+
+      <el-table-column align="center" label="操作" width="200" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button  type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
           <el-button  type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
@@ -39,28 +50,33 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
-
     <!-- 添加或修改对话框 -->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm" :rules="rules" :model="dataForm" status-icon label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="关键词" prop="keyword">
-          <el-input v-model="dataForm.keyword" />
+      <el-form
+        ref="dataForm"
+        :rules="rules"
+        :model="dataForm"
+        status-icon
+        label-position="left"
+        label-width="120px"
+        style="width: 400px; margin-left:50px;"
+      >
+        <el-form-item label="商品ID" prop="goodsId">
+          <el-input v-model="dataForm.goodsId" />
         </el-form-item>
-        <el-form-item label="跳转链接" prop="url">
-          <el-input v-model="dataForm.url" />
+        <el-form-item label="团购折扣" prop="discount">
+          <el-input v-model="dataForm.discount" />
         </el-form-item>
-        <el-form-item label="是否推荐" prop="isHot">
-          <el-select v-model="dataForm.isHot" placeholder="请选择">
-            <el-option :value="true" label="推荐" />
-            <el-option :value="false" label="普通" />
-          </el-select>
+        <el-form-item label="团购人数要求" prop="discountMember">
+          <el-input v-model="dataForm.discountMember" />
         </el-form-item>
-        <el-form-item label="是否默认" prop="isDefault">
-          <el-select v-model="dataForm.isDefault" placeholder="请选择">
-            <el-option :value="true" label="默认" />
-            <el-option :value="false" label="非默认" />
-          </el-select>
+        <el-form-item label="过期时间" prop="expireTime">
+          <el-date-picker
+            v-model="dataForm.expireTime"
+            type="datetime"
+            placeholder="选择日期"
+            value-format="yyyy-MM-dd HH:mm:ss"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -70,16 +86,23 @@
       </div>
     </el-dialog>
 
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+
+    <el-tooltip placement="top" content="返回顶部">
+      <back-to-top :visibility-height="100" />
+    </el-tooltip>
+
   </div>
 </template>
 
 <script>
-import { listKeyword, createKeyword, updateKeyword, deleteKeyword } from '@/api/keyword'
+import { listGroupon, publishGroupon, deleteGroupon, editGroupon } from '@/api/groupon'
+import BackToTop from '@/components/BackToTop'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
 export default {
-  name: 'Keyword',
-  components: { Pagination },
+  name: 'GrouponRule',
+  components: { BackToTop, Pagination },
   data() {
     return {
       list: [],
@@ -88,17 +111,17 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        keyword: undefined,
-        url: undefined,
+        goodsId: undefined,
         sort: 'create_time',
         order: 'desc'
       },
+      downloadLoading: false,
       dataForm: {
         id: undefined,
-        keyword: undefined,
-        url: undefined,
-        isHot: undefined,
-        isDefault: undefined
+        goodsId: '',
+        discount: '',
+        discountMember: '',
+        expireTime: undefined
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -106,10 +129,17 @@ export default {
         update: '编辑',
         create: '创建'
       },
+      statusMap: [
+        '正常',
+        '到期下线',
+        '提前下线'
+      ],
       rules: {
-        keyword: [{ required: true, message: '关键词不能为空', trigger: 'blur' }]
-      },
-      downloadLoading: false
+        goodsId: [{ required: true, message: '商品不能为空', trigger: 'blur' }],
+        discount: [{ required: true, message: '团购折扣不能为空', trigger: 'blur' }],
+        discountMember: [{ required: true, message: '团购人数不能为空', trigger: 'blur' }],
+        expireTime: [{ required: true, message: '过期时间不能为空', trigger: 'blur' }]
+      }
     }
   },
   created() {
@@ -118,7 +148,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      listKeyword(this.listQuery).then(response => {
+      listGroupon(this.listQuery).then(response => {
         this.list = response.data.records
         this.total = response.data.total
         this.listLoading = false
@@ -135,10 +165,10 @@ export default {
     resetForm() {
       this.dataForm = {
         id: undefined,
-        keyword: undefined,
-        url: undefined,
-        isHot: undefined,
-        isDefault: undefined
+        goodsId: '',
+        discount: '',
+        discountMember: '',
+        expireTime: undefined
       }
     },
     handleCreate() {
@@ -152,17 +182,12 @@ export default {
     createData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          createKeyword(this.dataForm).then(response => {
+          publishGroupon(this.dataForm).then(response => {
             this.list.unshift(response.data)
             this.dialogFormVisible = false
             this.$notify.success({
               title: '成功',
-              message: '创建成功'
-            })
-          }).catch(response => {
-            this.$notify.error({
-              title: '失败',
-              message: response.message
+              message: '创建团购规则成功'
             })
           })
         }
@@ -179,7 +204,7 @@ export default {
     updateData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          updateKeyword(this.dataForm).then(() => {
+          editGroupon(this.dataForm).then(() => {
             for (const v of this.list) {
               if (v.id === this.dataForm.id) {
                 const index = this.list.indexOf(v)
@@ -190,7 +215,7 @@ export default {
             this.dialogFormVisible = false
             this.$notify.success({
               title: '成功',
-              message: '更新成功'
+              message: '更新团购规则成功'
             })
           }).catch(response => {
             this.$notify.error({
@@ -202,10 +227,10 @@ export default {
       })
     },
     handleDelete(row) {
-      deleteKeyword(row).then(response => {
+      deleteGroupon(row).then(response => {
         this.$notify.success({
           title: '成功',
-          message: '删除成功'
+          message: '删除团购规则成功'
         })
         this.getList()
       }).catch(response => {
@@ -217,12 +242,12 @@ export default {
     },
     handleDownload() {
       this.downloadLoading = true
-      import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['关键词ID', '关键词', '跳转链接', '是否推荐', '是否默认']
-        const filterVal = ['id', 'keyword', 'url', 'isHot', 'isDefault']
-        excel.export_json_to_excel2(tHeader, this.list, filterVal, '关键词设置')
-        this.downloadLoading = false
-      })
+        import('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['商品ID', '名称', '首页主图', '折扣', '人数要求', '活动开始时间', '活动结束时间']
+          const filterVal = ['id', 'name', 'pic_url', 'discount', 'discountMember', 'createTime', 'expireTime']
+          excel.export_json_to_excel2(tHeader, this.list, filterVal, '商品信息')
+          this.downloadLoading = false
+        })
     }
   }
 }
