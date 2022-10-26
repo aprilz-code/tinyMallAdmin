@@ -4,7 +4,7 @@
     <!-- 查询和其他操作 -->
     <div class="filter-container">
       <el-input v-model="listQuery.grouponRuleId" clearable class="filter-item" style="width: 200px;" placeholder="请输入团购规则ID" />
-      <el-button  class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button
         :loading="downloadLoading"
         class="filter-item"
@@ -125,12 +125,12 @@ export default {
     },
     handleDownload() {
       this.downloadLoading = true
-        import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['商品ID', '名称', '首页主图', '折扣', '人数要求', '活动开始时间', '活动结束时间']
-          const filterVal = ['id', 'name', 'pic_url', 'discount', 'discountMember', 'createTime', 'expireTime']
-          excel.export_json_to_excel2(tHeader, this.list, filterVal, '商品信息')
-          this.downloadLoading = false
-        })
+      import('@/vendor/Export2Excel').then(excel => {
+        const tHeader = ['商品ID', '名称', '首页主图', '折扣', '人数要求', '活动开始时间', '活动结束时间']
+        const filterVal = ['id', 'name', 'pic_url', 'discount', 'discountMember', 'createTime', 'expireTime']
+        excel.export_json_to_excel2(tHeader, this.list, filterVal, '商品信息')
+        this.downloadLoading = false
+      })
     }
   }
 }

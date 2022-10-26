@@ -3,8 +3,8 @@
 
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-      <el-input v-model="listQuery.name" clearable class="filter-item" style="width: 200px;" placeholder="请输入广告标题"/>&nbsp;
-      <el-input v-model="listQuery.content" clearable class="filter-item" style="width: 200px;" placeholder="请输入广告内容"/>&nbsp;
+      <el-input v-model="listQuery.name" clearable class="filter-item" style="width: 200px;" placeholder="请输入广告标题" />&nbsp;
+      <el-input v-model="listQuery.content" clearable class="filter-item" style="width: 200px;" placeholder="请输入广告内容" />&nbsp;
       <el-button
         class="filter-item"
         type="primary"
@@ -32,11 +32,11 @@
     <!-- 查询结果 -->
     <el-table v-loading="listLoading" :data="list" element-loading-text="正在查询中。。。" border fit highlight-current-row>
 
-      <el-table-column align="center" label="广告ID" prop="id" sortable/>
+      <el-table-column align="center" label="广告ID" prop="id" sortable />
 
-      <el-table-column align="center" label="广告标题" prop="name"/>
+      <el-table-column align="center" label="广告标题" prop="name" />
 
-      <el-table-column align="center" label="广告内容" prop="content"/>
+      <el-table-column align="center" label="广告内容" prop="content" />
 
       <el-table-column align="center" label="广告图片" prop="url">
         <template slot-scope="scope">
@@ -48,9 +48,9 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="广告位置" prop="position"/>
+      <el-table-column align="center" label="广告位置" prop="position" />
 
-      <el-table-column align="center" label="活动链接" prop="link"/>
+      <el-table-column align="center" label="活动链接" prop="link" />
 
       <el-table-column align="center" label="是否启用" prop="enabled">
         <template slot-scope="scope">
@@ -96,10 +96,10 @@
         style="width: 400px; margin-left:50px;"
       >
         <el-form-item label="广告标题" prop="name">
-          <el-input v-model="dataForm.name"/>
+          <el-input v-model="dataForm.name" />
         </el-form-item>
         <el-form-item label="广告内容" prop="content">
-          <el-input v-model="dataForm.content"/>
+          <el-input v-model="dataForm.content" />
         </el-form-item>
         <el-form-item label="广告图片" prop="url">
           <el-upload
@@ -112,22 +112,22 @@
             accept=".jpg,.jpeg,.png,.gif"
           >
             <img v-if="dataForm.url" :src="dataForm.url" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"/>
+            <i v-else class="el-icon-plus avatar-uploader-icon" />
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过1024kb</div>
           </el-upload>
         </el-form-item>
         <el-form-item label="广告位置" prop="position">
           <el-select v-model="dataForm.position" placeholder="请选择">
-            <el-option :value="1" label="首页"/>
+            <el-option :value="1" label="首页" />
           </el-select>
         </el-form-item>
         <el-form-item label="活动链接" prop="link">
-          <el-input v-model="dataForm.link"/>
+          <el-input v-model="dataForm.link" />
         </el-form-item>
         <el-form-item label="是否启用" prop="enabled">
           <el-select v-model="dataForm.enabled" placeholder="请选择">
-            <el-option :value="true" label="启用"/>
-            <el-option :value="false" label="不启用"/>
+            <el-option :value="true" label="启用" />
+            <el-option :value="false" label="不启用" />
           </el-select>
         </el-form-item>
       </el-form>
@@ -171,15 +171,15 @@
 </style>
 
 <script>
-import {createAd, deleteAd, listAd, updateAd} from '@/api/ad'
-import {uploadPath} from '@/api/storage'
-import {getToken} from '@/utils/auth'
+import { createAd, deleteAd, listAd, updateAd } from '@/api/ad'
+import { uploadPath } from '@/api/storage'
+import { getToken } from '@/utils/auth'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
-import {thumbnail, toPreview} from '@/utils/index'
+import { thumbnail, toPreview } from '@/utils/index'
 
 export default {
   name: 'Ad',
-  components: {Pagination},
+  components: { Pagination },
   data() {
     return {
       thumbnail,
@@ -213,12 +213,12 @@ export default {
       },
       rules: {
         name: [
-          {required: true, message: '广告标题不能为空', trigger: 'blur'}
+          { required: true, message: '广告标题不能为空', trigger: 'blur' }
         ],
         content: [
-          {required: true, message: '广告内容不能为空', trigger: 'blur'}
+          { required: true, message: '广告内容不能为空', trigger: 'blur' }
         ],
-        url: [{required: true, message: '广告链接不能为空', trigger: 'blur'}]
+        url: [{ required: true, message: '广告链接不能为空', trigger: 'blur' }]
       },
       downloadLoading: false
     }
@@ -271,10 +271,10 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
-    uploadUrl: function (response) {
+    uploadUrl: function(response) {
       this.dataForm.url = response.data.url
     },
-    checkFileSize: function (file) {
+    checkFileSize: function(file) {
       if (file.size > 1048576) {
         this.$message.error(`${file.name}文件大于1024KB，请选择小于1024KB大小的图片`)
         return false
@@ -339,7 +339,7 @@ export default {
       })
     },
     handleDelete(row) {
-      deleteAd({'id': row.id})
+      deleteAd({ 'id': row.id })
         .then(response => {
           this.$notify.success({
             title: '成功',

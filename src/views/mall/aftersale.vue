@@ -5,13 +5,13 @@
     <div class="filter-container">
       <el-input v-model="listQuery.aftersaleSn" clearable class="filter-item" style="width: 200px;" placeholder="请输入售后编号" />
       <el-input v-model="listQuery.orderId" clearable class="filter-item" style="width: 200px;" placeholder="请输入订单ID" />
-      <el-button  class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">导出</el-button>
     </div>
 
     <div class="operator-container">
-      <el-button  class="filter-item" type="success" icon="el-icon-info" @click="handleBatchRecept">批量通过</el-button>
-      <el-button  class="filter-item" type="danger" icon="el-icon-delete" @click="handleBatchReject">批量拒绝</el-button>
+      <el-button class="filter-item" type="success" icon="el-icon-info" @click="handleBatchRecept">批量通过</el-button>
+      <el-button class="filter-item" type="danger" icon="el-icon-delete" @click="handleBatchReject">批量拒绝</el-button>
     </div>
 
     <el-tabs v-model="tab" @tab-click="handleClick">
@@ -37,10 +37,10 @@
 
       <el-table-column align="center" label="操作" min-width="120" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button  type="primary" size="mini" @click="handleRead(scope.row)">详情</el-button>
-          <el-button v-if="scope.row.status === 1"  type="success" size="mini" @click="handleRecept(scope.row)">通过</el-button>
-          <el-button v-if="scope.row.status === 1"  type="danger" size="mini" @click="handleReject(scope.row)">拒绝</el-button>
-          <el-button v-if="scope.row.status === 2"  type="warning" size="mini" @click="handleRefund(scope.row)">退款</el-button>
+          <el-button type="primary" size="mini" @click="handleRead(scope.row)">详情</el-button>
+          <el-button v-if="scope.row.status === 1" type="success" size="mini" @click="handleRecept(scope.row)">通过</el-button>
+          <el-button v-if="scope.row.status === 1" type="danger" size="mini" @click="handleReject(scope.row)">拒绝</el-button>
+          <el-button v-if="scope.row.status === 2" type="warning" size="mini" @click="handleRefund(scope.row)">退款</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -150,8 +150,8 @@ export default {
       contentDetail: '',
       contentDialogVisible: false,
       downloadLoading: false,
-      aftersaleDialogVisible:false,
-      aftersaleDetail:{}
+      aftersaleDialogVisible: false,
+      aftersaleDetail: {}
     }
   },
   created() {
@@ -311,10 +311,10 @@ export default {
       })
     },
     handleRead(row) {
-      this.aftersaleDetail = row;
-      console.log(this.aftersaleDetail);
+      this.aftersaleDetail = row
+      console.log(this.aftersaleDetail)
       this.aftersaleDialogVisible = true
-    },
+    }
   }
 }
 </script>

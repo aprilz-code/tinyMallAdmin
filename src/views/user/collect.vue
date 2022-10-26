@@ -3,39 +3,49 @@
 
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-      <el-input v-model="listQuery.userId" clearable class="filter-item" style="width: 200px;" placeholder="请输入用户ID"/>
-      <el-input v-model="listQuery.valueId" clearable class="filter-item" style="width: 200px;" placeholder="请输入商品ID"/>
+      <el-input v-model="listQuery.userId" clearable class="filter-item" style="width: 200px;" placeholder="请输入用户ID" />
+      <el-input v-model="listQuery.valueId" clearable class="filter-item" style="width: 200px;" placeholder="请输入商品ID" />
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
-      <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
-                 @click="handleDownload">导出
+      <el-button
+        :loading="downloadLoading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-download"
+        @click="handleDownload"
+      >导出
       </el-button>
     </div>
 
     <!-- 查询结果 -->
     <el-table v-loading="listLoading" :data="list" element-loading-text="正在查询中。。。" border fit highlight-current-row>
-      <el-table-column align="center" width="100px" label="收藏ID" prop="id" sortable/>
+      <el-table-column align="center" width="100px" label="收藏ID" prop="id" sortable />
 
-      <el-table-column align="center" min-width="100px" label="用户ID" prop="userId"/>
+      <el-table-column align="center" min-width="100px" label="用户ID" prop="userId" />
 
-      <el-table-column align="center" min-width="100px" label="商品ID" prop="valueId"/>
+      <el-table-column align="center" min-width="100px" label="商品ID" prop="valueId" />
 
-      <el-table-column align="center" min-width="100px" label="添加时间" prop="createTime"/>
+      <el-table-column align="center" min-width="100px" label="添加时间" prop="createTime" />
 
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
-                @pagination="getList"/>
+    <pagination
+      v-show="total>0"
+      :total="total"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
+      @pagination="getList"
+    />
 
   </div>
 </template>
 
 <script>
-import {listCollect} from '@/api/user'
+import { listCollect } from '@/api/user'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
 export default {
   name: 'Collect',
-  components: {Pagination},
+  components: { Pagination },
   data() {
     return {
       list: null,

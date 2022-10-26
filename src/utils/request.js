@@ -85,7 +85,7 @@ service.interceptors.response.use(
   }, error => {
     let msg = '服务器异常，请稍后重试'
     if (error.response.data.message) {
-      msg = error.response.data.message;
+      msg = error.response.data.message
     }
     console.log('err' + error)// for debug
     Message({

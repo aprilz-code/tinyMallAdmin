@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" @command="handleSetSize">
     <div>
-      <i class="el-icon-rank"/>
+      <i class="el-icon-rank" />
     </div>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item :disabled="size==='medium'" command="medium">Medium</el-dropdown-item>
@@ -32,7 +32,7 @@ export default {
       // In order to make the cached page re-rendered
       this.$store.dispatch('tagsView/delAllCachedViews', this.$route)
 
-      const {fullPath} = this.$route
+      const { fullPath } = this.$route
 
       this.$nextTick(() => {
         this.$router.replace({

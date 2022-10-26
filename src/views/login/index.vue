@@ -15,7 +15,7 @@
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <svg-icon icon-class="user"/>
+          <svg-icon icon-class="user" />
         </span>
         <el-input
           ref="username"
@@ -30,7 +30,7 @@
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <svg-icon icon-class="password"/>
+          <svg-icon icon-class="password" />
         </span>
         <el-input
           :key="passwordType"
@@ -48,7 +48,7 @@
 
       <el-form-item prop="code">
         <span class="svg-container">
-          <svg-icon icon-class="lock"/>
+          <svg-icon icon-class="lock" />
         </span>
         <el-input
           v-model="loginForm.code"
@@ -77,8 +77,8 @@
 </template>
 
 <script>
-import {getKaptcha} from '@/api/user'
-import {Message} from "element-ui";
+import { getKaptcha } from '@/api/user'
+import { Message } from 'element-ui'
 
 export default {
   name: 'Login',
@@ -99,12 +99,12 @@ export default {
       },
       codeImg: '',
       loginRules: {
-        username: [{required: true, message: '管理员账户不允许为空', trigger: 'blur'}],
+        username: [{ required: true, message: '管理员账户不允许为空', trigger: 'blur' }],
         password: [
-          {required: true, message: '管理员密码不允许为空', trigger: 'blur'},
-          {validator: validatePassword, trigger: 'blur'}
+          { required: true, message: '管理员密码不允许为空', trigger: 'blur' },
+          { validator: validatePassword, trigger: 'blur' }
         ],
-        code: [{required: true, message: '验证码不允许为空', trigger: 'blur'}]
+        code: [{ required: true, message: '验证码不允许为空', trigger: 'blur' }]
       },
       passwordType: 'password',
       loading: false
@@ -112,7 +112,7 @@ export default {
   },
   watch: {
     $route: {
-      handler: function (route) {
+      handler: function(route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
@@ -138,7 +138,6 @@ export default {
           this.codeImg = response.data.image
           this.loginForm.uuid = response.data.uuid
         }
-
       })
     },
     handleLogin() {
@@ -146,7 +145,7 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({path: this.redirect || '/'})
+            this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch((response) => {
             this.getCode()

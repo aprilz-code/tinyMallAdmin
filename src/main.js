@@ -24,8 +24,6 @@ import '@/permission' // permission control
 //   mockXHR()
 // }
 
-
-
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false

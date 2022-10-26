@@ -4,8 +4,8 @@
     <!-- 查询和其他操作 -->
     <div class="filter-container">
       <el-input v-model="listQuery.goodsId" clearable class="filter-item" style="width: 200px;" placeholder="请输入商品编号" />
-      <el-button  class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
-      <el-button  class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">添加</el-button>
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
+      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">添加</el-button>
       <el-button
         :loading="downloadLoading"
         class="filter-item"
@@ -44,8 +44,8 @@
 
       <el-table-column align="center" label="操作" width="200" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button  type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
-          <el-button  type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
+          <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
+          <el-button type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -242,12 +242,12 @@ export default {
     },
     handleDownload() {
       this.downloadLoading = true
-        import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['商品ID', '名称', '首页主图', '折扣', '人数要求', '活动开始时间', '活动结束时间']
-          const filterVal = ['id', 'name', 'pic_url', 'discount', 'discountMember', 'createTime', 'expireTime']
-          excel.export_json_to_excel2(tHeader, this.list, filterVal, '商品信息')
-          this.downloadLoading = false
-        })
+      import('@/vendor/Export2Excel').then(excel => {
+        const tHeader = ['商品ID', '名称', '首页主图', '折扣', '人数要求', '活动开始时间', '活动结束时间']
+        const filterVal = ['id', 'name', 'pic_url', 'discount', 'discountMember', 'createTime', 'expireTime']
+        excel.export_json_to_excel2(tHeader, this.list, filterVal, '商品信息')
+        this.downloadLoading = false
+      })
     }
   }
 }

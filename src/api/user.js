@@ -19,7 +19,7 @@ export function getInfo(token) {
   return request({
     url: '/auth/info',
     method: 'get',
-    params: {token}
+    params: { token }
   })
 }
 
@@ -27,7 +27,7 @@ export function logout(token) {
   return request({
     url: '/auth/logout',
     method: 'post',
-    params: {token}
+    params: { token }
   })
 }
 
@@ -43,7 +43,7 @@ export function userDetail(id) {
   return request({
     url: '/user/detail',
     method: 'get',
-    params: {id}
+    params: { id }
   })
 }
 
