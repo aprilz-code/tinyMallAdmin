@@ -37,7 +37,7 @@ service.interceptors.response.use(
         confirmButtonText: '确定',
         type: 'error'
       }).then(() => {
-        store.dispatch('FedLogOut').then(() => {
+        store.dispatch('user/logout').then(() => {
           location.reload()
         })
       })
